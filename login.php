@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
-<?php
-session_start();
-?>
+<?php session_start() ?>
 
 <head>
   <meta charset="UTF-8">
   <title>Barangay Information System</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-  <!-- bootstrap 3.0.2 -->
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <!-- Theme style -->
   <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
-
 </head>
 
 <body class="skin-black">
@@ -52,14 +47,10 @@ session_start();
   if (isset($_POST['btn_login'])) {
     $username = $_POST['txt_username'];
     $password = $_POST['txt_password'];
-
-
     $admin = mysqli_query($con, "SELECT * from tbluser where username = '$username' and password = '$password' and type = 'administrator' ");
     $numrow_admin = mysqli_num_rows($admin);
-
     $zone = mysqli_query($con, "SELECT * from tblzone where username = '$username' and password = '$password'");
     $numrow_zone = mysqli_num_rows($zone);
-
     $staff = mysqli_query($con, "SELECT * from tblstaff where username = '$username' and password = '$password' ");
     $numrow_staff = mysqli_num_rows($staff);
 
@@ -87,13 +78,8 @@ session_start();
       header('location: pages/resident/resident.php');
     } else {
       echo '<script type="text/javascript">document.getElementById("error").innerHTML = "Invalid Account";</script>';
-
     }
-
-  }
-
-  ?>
-
+  } ?>
 </body>
 
 </html>

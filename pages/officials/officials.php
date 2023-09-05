@@ -10,49 +10,30 @@ if (!isset($_SESSION['role'])) {
   include('../head_css.php'); ?>
 
   <body class="skin-black">
-    <!-- header logo: style can be found in header.less -->
-    <?php
-
-    include "../connection.php";
-    ?>
-    <?php include('../header.php'); ?>
-
+    <?php include "../connection.php" ?>
+    <?php include('../header.php') ?>
     <div class="wrapper row-offcanvas row-offcanvas-left">
-      <!-- Left side column. contains the logo and sidebar -->
-      <?php include('../sidebar-left.php'); ?>
-
-      <!-- Right side column. Contains the navbar and content of the page -->
+      <?php include('../sidebar-left.php') ?>
       <aside class="right-side">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Barangay Officials
-          </h1>
-
+          <h1>Barangay Officials</h1>
         </section>
-
-        <!-- Main content -->
         <section class="content">
           <div class="row">
-            <!-- left column -->
             <div class="box">
               <div class="box-header">
                 <div style="padding:10px;">
-
                   <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addCourseModal"><i
                       class="fa fa-user-plus" aria-hidden="true"></i> &nbsp;ADD BRGY OFFICIALS</button>
-
                   <?php
                   if (!isset($_SESSION['staff'])) {
                     ?>
                     <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal"><i
                         class="fa fa-trash-o" aria-hidden="true"></i> &nbsp;REMOVE</button>
                     <?php
-                  }
-                  ?>
-
+                  } ?>
                 </div>
-              </div><!-- /.box-header -->
+              </div>
               <div class="box-body table-responsive">
                 <form method="post">
                   <table id="table" class="table table-bordered table-striped">
@@ -64,8 +45,7 @@ if (!isset($_SESSION['role'])) {
                           <th style="width: 20px !important;"><input type="checkbox" name="chk_delete[]" class="cbxMain"
                               onchange="checkMain(this)" /></th>
                           <?php
-                        }
-                        ?>
+                        } ?>
                         <th>POSITION</th>
                         <th>NAME</th>
                         <th>CONTACT</th>
@@ -78,80 +58,64 @@ if (!isset($_SESSION['role'])) {
                     <tbody>
                       <?php
                       if (!isset($_SESSION['staff'])) {
-
                         $squery = mysqli_query($con, "select * from tblofficial ");
                         while ($row = mysqli_fetch_array($squery)) {
                           echo '
-                                                        <tr>
-                                                            <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . $row['id'] . '" /></td>
-                                                            <td>' . $row['sPosition'] . '</td>
-                                                            <td>' . $row['completeName'] . '</td>
-                                                            <td>' . $row['pcontact'] . '</td>
-                                                            <td>' . $row['paddress'] . '</td>
-                                                            <td>' . $row['termStart'] . '</td>
-                                                            <td>' . $row['termEnd'] . '</td>
-                                                            <td style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                                                <button class="btn btn-primary btn-sm" data-target="#editModal' . $row['id'] . '" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT</button>';
+                            <tr>
+                              <td><input type="checkbox" name="chk_delete[]" class="chk_delete" value="' . $row['id'] . '" /></td>
+                              <td>' . $row['sPosition'] . '</td>
+                              <td>' . $row['completeName'] . '</td>
+                              <td>' . $row['pcontact'] . '</td>
+                              <td>' . $row['paddress'] . '</td>
+                              <td>' . $row['termStart'] . '</td>
+                              <td>' . $row['termEnd'] . '</td>
+                              <td style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                              <button class="btn btn-primary btn-sm" data-target="#editModal' . $row['id'] . '" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT</button>';
                           if ($row['status'] == 'Ongoing Term') {
                             echo '<button class="btn btn-danger btn-sm" data-target="#endModal' . $row['id'] . '" data-toggle="modal"><i class="fa fa-minus-circle " aria-hidden="true"></i> END</button>';
                           } else {
                             echo '<button class="btn btn-success btn-sm" data-target="#startModal' . $row['id'] . '" data-toggle="modal"><i class="fa fa-minus-circle " aria-hidden="true"></i> START</button>';
                           }
                           echo '</td>
-                                                        
-                                                        </tr>
-                                                        ';
-
+                            </tr>
+                          ';
                           include "edit_modal.php";
                           include "endterm_modal.php";
                           include "startterm_modal.php";
                         }
-
                       } else {
                         $squery = mysqli_query($con, "select * from tblofficial where status = 'Ongoing Term' group by termend");
                         while ($row = mysqli_fetch_array($squery)) {
                           echo '
-                                                        <tr>
-                                                            <td>' . $row['sPosition'] . '</td>
-                                                            <td>' . $row['completeName'] . '</td>
-                                                            <td>' . $row['pcontact'] . '</td>
-                                                            <td>' . $row['paddress'] . '</td>
-                                                            <td>' . $row['termStart'] . '</td>
-                                                            <td>' . $row['termEnd'] . '</td>
-                                                            <td><button class="btn btn-primary btn-sm" data-target="#editModal' . $row['id'] . '" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></td>
-                                                        </tr>
-                                                        ';
-
+                            <tr>
+                              <td>' . $row['sPosition'] . '</td>
+                              <td>' . $row['completeName'] . '</td>
+                              <td>' . $row['pcontact'] . '</td>
+                              <td>' . $row['paddress'] . '</td>
+                              <td>' . $row['termStart'] . '</td>
+                              <td>' . $row['termEnd'] . '</td>
+                              <td><button class="btn btn-primary btn-sm" data-target="#editModal' . $row['id'] . '" data-toggle="modal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></td>
+                            </tr>
+                          ';
                           include "edit_modal.php";
                         }
-                      }
-                      ?>
+                      } ?>
                     </tbody>
                   </table>
-
                   <?php include "../deleteModal.php"; ?>
-
                 </form>
-              </div><!-- /.box-body -->
-            </div><!-- /.box -->
-
+              </div>
+            </div>
             <?php include "../duplicate_error.php"; ?>
             <?php include "../edit_notif.php"; ?>
-
             <?php include "../added_notif.php"; ?>
-
             <?php include "../delete_notif.php"; ?>
-
             <?php include "add_modal.php"; ?>
-
             <?php include "function.php"; ?>
-
-
-          </div> <!-- /.row -->
-        </section><!-- /.content -->
-      </aside><!-- /.right-side -->
-    </div><!-- ./wrapper -->
-    <!-- jQuery 2.0.2 -->
+          </div>
+        </section>
+      </aside>
+    </div>
   <?php }
 include "../footer.php"; ?>
   <script type="text/javascript">
@@ -172,8 +136,7 @@ include "../footer.php"; ?>
         });
       });
       <?php
-    }
-    ?>
+    } ?>
   </script>
 </body>
 

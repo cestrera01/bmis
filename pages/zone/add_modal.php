@@ -1,4 +1,3 @@
-<!-- ========================= MODAL ======================= -->
 <div id="addZoneModal" class="modal fade">
   <form method="post">
     <div class="modal-dialog modal-sm" style="width:300px !important;">
@@ -8,7 +7,6 @@
           <h4 class="modal-title">Manage Zone Leader</h4>
         </div>
         <div class="modal-body">
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -27,7 +25,6 @@
               </div>
             </div>
           </div>
-
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel" />
@@ -40,35 +37,31 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-
     var timeOut = null; // this used for hold few seconds to made ajax request
-
     var loading_html = '<img src="../../img/ajax-loader.gif" style="height: 20px; width: 20px;"/>'; // just an loading image or we can put any texts here
-
-    //when button is clicked
+    // when button is clicked
     $('#username').keyup(function (e) {
-
       // when press the following key we need not to make any ajax request, you can customize it with your own way
       switch (e.keyCode) {
-        //case 8:   //backspace
-        case 9:     //tab
-        case 13:    //enter
-        case 16:    //shift
-        case 17:    //ctrl
-        case 18:    //alt
-        case 19:    //pause/break
-        case 20:    //caps lock
-        case 27:    //escape
-        case 33:    //page up
-        case 34:    //page down
-        case 35:    //end
-        case 36:    //home
-        case 37:    //left arrow
-        case 38:    //up arrow
-        case 39:    //right arrow
-        case 40:    //down arrow
-        case 45:    //insert
-          //case 46:  //delete
+        // case 8:   // backspace
+        case 9:     // tab
+        case 13:    // enter
+        case 16:    // shift
+        case 17:    // ctrl
+        case 18:    // alt
+        case 19:    // pause/break
+        case 20:    // caps lock
+        case 27:    // escape
+        case 33:    // page up
+        case 34:    // page down
+        case 35:    // end
+        case 36:    // home
+        case 37:    // left arrow
+        case 38:    // up arrow
+        case 39:    // right arrow
+        case 40:    // down arrow
+        case 45:    // insert
+          // case 46:  // delete
           return;
       }
       if (timeOut != null)
@@ -78,10 +71,9 @@
     });
   });
   function is_available() {
-    //get the username
+    // get the username
     var username = $('#username').val();
-
-    //make the ajax request to check is username available or not
+    // make the ajax request to check is username available or not
     $.post("check_username.php", { username: username },
       function (result) {
         console.log(result);
@@ -94,6 +86,5 @@
           document.getElementById("btn_add").disabled = false;
         }
       });
-
   }
 </script>

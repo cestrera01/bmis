@@ -1,4 +1,3 @@
-<!-- ========================= MODAL ======================= -->
 <div id="reqModal" class="modal fade">
   <form method="post">
     <div class="modal-dialog modal-sm" style="width:300px !important;">
@@ -8,7 +7,6 @@
           <h4 class="modal-title">Manage Clearance</h4>
         </div>
         <div class="modal-body">
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -17,7 +15,6 @@
               </div>
             </div>
           </div>
-
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel" />

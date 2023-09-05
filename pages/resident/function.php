@@ -6,20 +6,16 @@ if (isset($_POST['btn_add'])) {
   $ddl_gender = $_POST['ddl_gender'];
   $txt_bdate = $_POST['txt_bdate'];
   $txt_bplace = $_POST['txt_bplace'];
-
-  //$txt_age = $_POST['txt_age'];
   $dateOfBirth = $txt_bdate;
   $today = date("Y-m-d");
   $diff = date_diff(date_create($dateOfBirth), date_create($today));
   $txt_age = $diff->format('%y');
-
   $txt_brgy = $_POST['txt_brgy'];
   $txt_dperson = $_POST['txt_dperson'];
   $txt_mstatus = $_POST['txt_mstatus'];
   $txt_zone = $_POST['txt_zone'];
   $txt_householdmem = $_POST['txt_householdmem'];
   $txt_rthead = $_POST['txt_rthead'];
-
   $txt_btype = $_POST['txt_btype'];
   $txt_cstatus = $_POST['txt_cstatus'];
   $txt_occp = $_POST['txt_occp'];
@@ -33,7 +29,6 @@ if (isset($_POST['btn_add'])) {
   $txt_phno = $_POST['txt_phno'];
   $ddl_eattain = $_POST['ddl_eattain'];
   $ddl_hos = $_POST['ddl_hos'];
-
   $ddl_los = $_POST['ddl_los'];
   $ddl_dtype = $_POST['ddl_dtype'];
   $txt_water = $_POST['txt_water'];
@@ -42,14 +37,11 @@ if (isset($_POST['btn_add'])) {
   $txt_faddress = $_POST['txt_faddress'];
   $txt_uname = $_POST['txt_uname'];
   $txt_upass = $_POST['txt_upass'];
-
   $txt_remarks = $_POST['txt_remarks'];
-
   $name = basename($_FILES['txt_image']['name']);
   $temp = $_FILES['txt_image']['tmp_name'];
   $imagetype = $_FILES['txt_image']['type'];
   $size = $_FILES['txt_image']['size'];
-
   $milliseconds = round(microtime(true) * 1000);
   $image = $milliseconds . '_' . $name;
 
@@ -76,7 +68,7 @@ if (isset($_POST['btn_add'])) {
                                         bplace,
                                         age,
                                         barangay,
-                                        zone,
+                                        purok,
                                         totalhousehold,
                                         differentlyabledperson,
                                         relationtohead,
@@ -153,7 +145,6 @@ if (isset($_POST['btn_add'])) {
       }
     } else {
       $txt_image = 'default.png';
-
       $query = mysqli_query(
         $con,
         "INSERT INTO tblresident (
@@ -164,7 +155,7 @@ if (isset($_POST['btn_add'])) {
                                         bplace,
                                         age,
                                         barangay,
-                                        zone,
+                                        purok,
                                         totalhousehold,
                                         differentlyabledperson,
                                         relationtohead,
@@ -234,10 +225,7 @@ if (isset($_POST['btn_add'])) {
                                     )"
       )
         or die('Error: ' . mysqli_error($con));
-
     }
-
-
     if ($query == true) {
       $_SESSION['added'] = 1;
       header("location: " . $_SERVER['REQUEST_URI']);
@@ -246,9 +234,7 @@ if (isset($_POST['btn_add'])) {
     $_SESSION['duplicateuser'] = 1;
     header("location: " . $_SERVER['REQUEST_URI']);
   }
-
 }
-
 
 if (isset($_POST['btn_save'])) {
   $txt_id = $_POST['hidden_id'];
@@ -257,25 +243,20 @@ if (isset($_POST['btn_save'])) {
   $txt_edit_mname = $_POST['txt_edit_mname'];
   $txt_edit_bdate = $_POST['txt_edit_bdate'];
   $txt_edit_bplace = $_POST['txt_edit_bplace'];
-
   $dateOfBirth = $txt_edit_bdate;
   $today = date("Y-m-d");
   $diff = date_diff(date_create($dateOfBirth), date_create($today));
   $txt_edit_age = $diff->format('%y');
-
   $txt_edit_brgy = $_POST['txt_edit_brgy'];
   $txt_edit_dperson = $_POST['txt_edit_dperson'];
   $txt_edit_mstatus = $_POST['txt_edit_mstatus'];
   $txt_edit_zone = $_POST['txt_edit_zone'];
   $txt_edit_householdmem = $_POST['txt_edit_householdmem'];
   $txt_edit_rthead = $_POST['txt_edit_rthead'];
-
   $txt_edit_btype = $_POST['txt_edit_btype'];
   $txt_edit_cstatus = $_POST['txt_edit_cstatus'];
   $txt_edit_occp = $_POST['txt_edit_occp'];
   $txt_edit_income = $_POST['txt_edit_income'];
-
-
   $txt_edit_householdnum = $_POST['txt_edit_householdnum'];
   $txt_edit_length = $_POST['txt_edit_length'];
   $txt_edit_religion = $_POST['txt_edit_religion'];
@@ -286,23 +267,19 @@ if (isset($_POST['btn_save'])) {
   $txt_edit_phno = $_POST['txt_edit_phno'];
   $ddl_edit_eattain = $_POST['ddl_edit_eattain'];
   $ddl_edit_hos = $_POST['ddl_edit_hos'];
-
   $ddl_edit_los = $_POST['ddl_edit_los'];
   $ddl_edit_dtype = $_POST['ddl_edit_dtype'];
   $txt_edit_water = $_POST['txt_edit_water'];
   $txt_edit_lightning = $_POST['txt_edit_lightning'];
   $txt_edit_toilet = $_POST['txt_edit_toilet'];
   $txt_edit_faddress = $_POST['txt_edit_faddress'];
-
   $txt_edit_uname = $_POST['txt_edit_uname'];
   $txt_edit_upass = $_POST['txt_edit_upass'];
   $txt_edit_remarks = $_POST['txt_edit_remarks'];
-
   $name = basename($_FILES['txt_edit_image']['name']);
   $temp = $_FILES['txt_edit_image']['tmp_name'];
   $imagetype = $_FILES['txt_edit_image']['type'];
   $size = $_FILES['txt_edit_image']['size'];
-
   $milliseconds = round(microtime(true) * 1000);
   $image = $milliseconds . '_' . $name;
 
@@ -315,11 +292,9 @@ if (isset($_POST['btn_save'])) {
   $ct = mysqli_num_rows($su);
 
   if ($ct == 0) {
-
     if ($name != "") {
       if (($imagetype == "image/jpeg" || $imagetype == "image/png" || $imagetype == "image/bmp") && $size <= 2048000) {
         if (move_uploaded_file($temp, 'image/' . $image)) {
-
           $txt_edit_image = $image;
           $update_query = mysqli_query($con, "UPDATE tblresident set 
                                         lname = '" . $txt_edit_lname . "',
@@ -329,7 +304,7 @@ if (isset($_POST['btn_save'])) {
                                         bplace = '" . $txt_edit_bplace . "',
                                         age = '" . $txt_edit_age . "',
                                         barangay = '" . $txt_edit_brgy . "',
-                                        zone = '" . $txt_edit_zone . "',
+                                        purok = '" . $txt_edit_zone . "',
                                         totalhousehold = '" . $txt_edit_householdmem . "',
                                         differentlyabledperson = '" . $txt_edit_dperson . "',
                                         relationtohead = '" . $txt_edit_rthead . "',
@@ -366,10 +341,8 @@ if (isset($_POST['btn_save'])) {
         header("location: " . $_SERVER['REQUEST_URI']);
       }
     } else {
-
       $chk_image = mysqli_query($con, "SELECT * from tblresident where id = '" . $_POST['hidden_id'] . "' ");
       $rowimg = mysqli_fetch_array($chk_image);
-
       $txt_edit_image = $rowimg['image'];
       $update_query = mysqli_query($con, "UPDATE tblresident set 
                                         lname = '" . $txt_edit_lname . "',
@@ -379,7 +352,7 @@ if (isset($_POST['btn_save'])) {
                                         bplace = '" . $txt_edit_bplace . "',
                                         age = '" . $txt_edit_age . "',
                                         barangay = '" . $txt_edit_brgy . "',
-                                        zone = '" . $txt_edit_zone . "',
+                                        purok = '" . $txt_edit_zone . "',
                                         totalhousehold = '" . $txt_edit_householdmem . "',
                                         differentlyabledperson = '" . $txt_edit_dperson . "',
                                         relationtohead = '" . $txt_edit_rthead . "',
@@ -416,25 +389,20 @@ if (isset($_POST['btn_save'])) {
       $_SESSION['edited'] = 1;
       header("location: " . $_SERVER['REQUEST_URI']);
     }
-
   } else {
     $_SESSION['duplicateuser'] = 1;
     header("location: " . $_SERVER['REQUEST_URI']);
   }
-
-
 }
 
 if (isset($_POST['btn_delete'])) {
   if (isset($_POST['chk_delete'])) {
     foreach ($_POST['chk_delete'] as $value) {
       $delete_query = mysqli_query($con, "DELETE from tblresident where id = '$value' ") or die('Error: ' . mysqli_error($con));
-
       if ($delete_query == true) {
         $_SESSION['delete'] = 1;
         header("location: " . $_SERVER['REQUEST_URI']);
       }
     }
   }
-}
-?>
+} ?>

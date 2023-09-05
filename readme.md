@@ -17,3 +17,6 @@ Pass: katrina
 # Purok Leader / Zone Leader
 User: none
 Pass: none
+
+
+# The user interface (UIs) and documentation is on the docs folder

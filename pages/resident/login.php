@@ -8,11 +8,8 @@ session_start();
   <meta charset="UTF-8">
   <title>Barangay Information System</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-  <!-- bootstrap 3.0.2 -->
   <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <!-- Theme style -->
   <link href="../../css/AdminLTE.css" rel="stylesheet" type="text/css" />
-
 </head>
 
 <body class="skin-black">
@@ -67,8 +64,7 @@ session_start();
     } else {
       echo '<script type="text/javascript">document.getElementById("error").innerHTML = "Invalid Account";</script>';
     }
-  }
-  ?>
+  } ?>
 </body>
 
 </html>

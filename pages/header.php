@@ -1,53 +1,49 @@
-<?php
-
-echo '<header class="header">
-            <a href="#" class="logo">
-                <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                Barangay Information System
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-right">
-                    <ul class="nav navbar-nav">
-
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="glyphicon glyphicon-user"></i><span>' . $_SESSION['role'] . '<i class="caret"></i></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header bg-light-blue">
-                                    
-                                    <p>
-                                        ' . $_SESSION['role'] . '
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Change Account</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="../../logout.php" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>'; ?>
-
+<?php echo '<header class="header">
+  <a href="#" class="logo">
+    <!-- Add the class icon to your logo image or logo icon to add the margining -->
+    Barangay Information System
+  </a>
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-user"></i><span>' . $_SESSION['role'] . '<i class="caret"></i></span>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header bg-light-blue">
+              <p>
+                ' . $_SESSION['role'] . '
+              </p>
+            </li>
+            <!-- Menu Body -->
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Change
+                  Account</a>
+              </div>
+              <div class="pull-right">
+                <a href="../../logout.php" class="btn btn-default btn-flat">Sign out</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>'
+  ?>
 
 <div id="editProfileModal" class="modal fade">
   <form method="post">
@@ -65,57 +61,55 @@ echo '<header class="header">
                 $user = mysqli_query($con, "SELECT * from tbluser where id = '" . $_SESSION['userid'] . "' ");
                 while ($row = mysqli_fetch_array($user)) {
                   echo '
-                                    <div class="form-group">
-                                        <label>Username:</label>
-                                        <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password:</label>
-                                        <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
-                                    </div>';
+                    <div class="form-group">
+                      <label>Username:</label>
+                      <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
+                    </div>
+                    <div class="form-group">
+                      <label>Password:</label>
+                      <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
+                    </div>';
                 }
               } elseif ($_SESSION['role'] == "Zone Leader") {
                 $user = mysqli_query($con, "SELECT * from tblzone where id = '" . $_SESSION['userid'] . "' ");
                 while ($row = mysqli_fetch_array($user)) {
                   echo '
-                                    <div class="form-group">
-                                        <label>Username:</label>
-                                        <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password:</label>
-                                        <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
-                                    </div>';
+                    <div class="form-group">
+                      <label>Username:</label>
+                      <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
+                    </div>
+                    <div class="form-group">
+                      <label>Password:</label>
+                      <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
+                    </div>';
                 }
               } elseif ($_SESSION['staff'] == "Staff") {
                 $user = mysqli_query($con, "SELECT * from tblstaff where id = '" . $_SESSION['userid'] . "' ");
                 while ($row = mysqli_fetch_array($user)) {
                   echo '
-                                    <div class="form-group">
-                                        <label>Username:</label>
-                                        <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password:</label>
-                                        <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
-                                    </div>';
+                    <div class="form-group">
+                      <label>Username:</label>
+                      <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
+                    </div>
+                    <div class="form-group">
+                      <label>Password:</label>
+                      <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
+                    </div>';
                 }
               } else {
                 $user = mysqli_query($con, "SELECT * from tblresident where id = '" . $_SESSION['userid'] . "' ");
                 while ($row = mysqli_fetch_array($user)) {
                   echo '
-                                    <div class="form-group">
-                                        <label>Username:</label>
-                                        <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password:</label>
-                                        <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
-                                    </div>';
+                    <div class="form-group">
+                      <label>Username:</label>
+                      <input name="txt_username" id="txt_username" class="form-control input-sm" type="text" value="' . $row['username'] . '" />
+                    </div>
+                    <div class="form-group">
+                      <label>Password:</label>
+                      <input name="txt_password" id="txt_password" class="form-control input-sm" type="password"  value="' . $row['password'] . '"/>
+                    </div>';
                 }
-              }
-              ?>
-
+              } ?>
             </div>
           </div>
         </div>
@@ -128,7 +122,6 @@ echo '<header class="header">
     </div>
   </form>
 </div>
-
 
 <?php
 if (isset($_POST['btn_saveeditProfile'])) {
@@ -151,6 +144,4 @@ if (isset($_POST['btn_saveeditProfile'])) {
       header("location: " . $_SERVER['REQUEST_URI']);
     }
   }
-}
-
-?>
+} ?>

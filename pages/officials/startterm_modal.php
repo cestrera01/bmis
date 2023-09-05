@@ -7,7 +7,6 @@
           <h4 class="modal-title">Startterm Confirmation</h4>
         </div>
         <div class="modal-body">
-
           <input type="hidden" value="<?php echo $row['id']; ?>" name="hidden_id" id="hidden_id" />
           <p>Are you sure you want to start the term of
             <?php echo $row['completeName']; ?> ?

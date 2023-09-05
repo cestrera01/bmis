@@ -1,4 +1,3 @@
-<!-- ===== DELETE MODAL ==== -->
 <div id="deleteModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -16,4 +15,3 @@
     </div>
   </div>
 </div>
-<!-- ===== END OF DELETE MODAL ===== -->

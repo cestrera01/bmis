@@ -1,4 +1,3 @@
-<!-- ========================= MODAL ======================= -->
 <div id="disapproveModal<?php echo $row['pid'] ?>" class="modal fade">
   <form method="post">
     <div class="modal-dialog modal-sm" style="width:300px !important;">
@@ -10,10 +9,9 @@
         <div class="modal-body">
           <?php
           echo '
-                <input type="hidden" value="' . $row['pid'] . '" name="hidden_id" id="hidden_id"/>';
+            <input type="hidden" value="' . $row['pid'] . '" name="hidden_id" id="hidden_id"/>';
           ?>
           <p>Are you sure you want to disapproved this clearance? If yes, put the findings.</p>
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -22,7 +20,6 @@
               </div>
             </div>
           </div>
-
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Cancel" />

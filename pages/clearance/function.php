@@ -7,7 +7,6 @@ if (isset($_POST['btn_add'])) {
   $txt_ornum = $_POST['txt_ornum'];
   $txt_amount = $_POST['txt_amount'];
   $date = date('Y-m-d');
-
   $chkdup = mysqli_query($con, "SELECT * from tblclearance where clearanceNo = " . $txt_cnum . " ");
   $num_rows = mysqli_num_rows($chkdup);
 
@@ -40,7 +39,6 @@ if (isset($_POST['btn_req'])) {
   if ($num_row > 0) {
     $chk = mysqli_query($con, "select * from tblresident where id = '" . $_SESSION['userid'] . "' ");
     while ($row = mysqli_fetch_array($chk)) {
-
       if ($row['lengthofstay'] < 6) {
         $_SESSION['lengthofstay'] = 1;
         header("location: " . $_SERVER['REQUEST_URI']);
@@ -49,7 +47,6 @@ if (isset($_POST['btn_req'])) {
         $date = date('Y-m-d');
         $reqquery = mysqli_query($con, "INSERT INTO tblclearance (clearanceNo,residentid,findings,purpose,orNo,samount,dateRecorded,recordedBy,status) 
                     values ('','" . $_SESSION['userid'] . "','','$txt_purpose','','','$date','" . $_SESSION['role'] . "','New') ") or die('Error: ' . mysqli_error($con));
-
         if ($reqquery == true) {
           header("location: " . $_SERVER['REQUEST_URI']);
         }
@@ -67,7 +64,6 @@ if (isset($_POST['btn_approve'])) {
   $txt_findings = $_POST['txt_findings'];
   $txt_ornum = $_POST['txt_ornum'];
   $txt_amount = $_POST['txt_amount'];
-
   $approve_query = mysqli_query($con, "UPDATE tblclearance set clearanceNo= '" . $txt_cnum . "', findings = '" . $txt_findings . "', orNo = '" . $txt_ornum . "', samount = '" . $txt_amount . "', status='Approved' where id = '" . $txt_id . "' ") or die('Error: ' . mysqli_error($con));
 
   if ($approve_query == true) {
@@ -76,7 +72,6 @@ if (isset($_POST['btn_approve'])) {
 }
 
 if (isset($_POST['btn_disapprove'])) {
-
   $txt_id = $_POST['hidden_id'];
   $txt_findings = $_POST['txt_findings'];
   $disapprove_query = mysqli_query($con, "UPDATE tblclearance set findings = '" . $txt_findings . "' , status='Disapproved' where id = '" . $txt_id . "' ") or die('Error: ' . mysqli_error($con));
@@ -86,7 +81,6 @@ if (isset($_POST['btn_disapprove'])) {
   }
 }
 
-
 if (isset($_POST['btn_save'])) {
   $txt_id = $_POST['hidden_id'];
   $txt_edit_cnum = $_POST['txt_edit_cnum'];
@@ -94,7 +88,6 @@ if (isset($_POST['btn_save'])) {
   $txt_edit_purpose = $_POST['txt_edit_purpose'];
   $txt_edit_ornum = $_POST['txt_edit_ornum'];
   $txt_edit_amount = $_POST['txt_edit_amount'];
-
   $update_query = mysqli_query($con, "UPDATE tblclearance set clearanceNo= '" . $txt_edit_cnum . "', findings = '" . $txt_edit_findings . "', purpose = '" . $txt_edit_purpose . "', orNo = '" . $txt_edit_ornum . "', samount = '" . $txt_edit_amount . "' where id = '" . $txt_id . "' ") or die('Error: ' . mysqli_error($con));
 
   if (isset($_SESSION['role'])) {
@@ -119,7 +112,4 @@ if (isset($_POST['btn_delete'])) {
       }
     }
   }
-}
-
-
-?>
+} ?>
